@@ -1,4 +1,4 @@
 class Post < ActiveRecord::Base
-	# create some validations here that ensure both our attributes
-	# are present when a user creates or edits a post
+	validates :bru_name, :title, :body, presence: true 
+	validates :bru_name, uniqueness: {case_sensitive: false}
 end

@@ -2,50 +2,50 @@ class PostsController < ApplicationController
 	# BONUS! Learn how to use a before_action to keep your controller DRY
 
 	def index
-		@places = Place.all
+		@posts = Post.all
 	end
 
 	def new
-		@place = Place.new
+		@post = Post.new
 	end
 
 	def create
-		@place = Place.new(place_params)
+		@post = Post.new(post_params)
  
-  		if @place.save
-    	redirect_to @place
+  		if @post.save
+    	redirect_to @post
   		else
     	render 'new'
   		end
   	end
 
 	def show
-		@place = Place.find params[:id]
+		@post = Post.find params[:id]
 	end
 
 	def edit
-		@place = Place.find(params[:id])
+		@post = Post.find(params[:id])
 	end
 
 	def update
-		@place = Place.find(params[:id])
+		@post = Post.find(params[:id])
 
-		if @place.update(place_params)
-    	redirect_to @place
+		if @post.update(post_params)
+    	redirect_to @post
   		else
     	render 'edit'
   		end
 	end
 
 	def destroy
-		@place = Place.find(params[:id])
-		@place.destroy
+		@post = Post.find(params[:id])
+		@post.destroy
 
-		redirect_to_places_path
+		redirect_to_posts_path
 	end
 
 private
 	def post_params
-		params.require(:place).permit(:bru_name, :title, :body)
+		params.require(:post).permit(:bru_name, :title, :body)
 	end
 end
