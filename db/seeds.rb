@@ -3,3 +3,5 @@ posts = Post.create([
 	{ bru_name: "Erica", title: "Guess what today is?", body: "It's my birthday!" },
 	{ bru_name: "Brian", title:  "Teaching is fun!", body: "Learning Rails is both exciting and empowering!" }
 	])
+
+

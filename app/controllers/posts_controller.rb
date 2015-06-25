@@ -2,40 +2,50 @@ class PostsController < ApplicationController
 	# BONUS! Learn how to use a before_action to keep your controller DRY
 
 	def index
-		# create an instance variable that points to all of our posts
-		# there are already some seeded posts, get them to show up in your app
+		@places = Place.all
 	end
 
 	def new
-		# instantiate an empty (new) Post
+		@place = Place.new
 	end
 
 	def create
-		# create a Post and save it into the database
-		# redirect to the new Post
-	end
+		@place = Place.new(place_params)
+ 
+  		if @place.save
+    	redirect_to @place
+  		else
+    	render 'new'
+  		end
+  	end
 
 	def show
-		# assign an instance variable to the post with id from params
+		@place = Place.find params[:id]
 	end
 
 	def edit
-		# assign an instance variable to the post with id from params
+		@place = Place.find(params[:id])
 	end
 
 	def update
-		# update the instance variable from our edit page
-		# redirect to the updated post
+		@place = Place.find(params[:id])
+
+		if @place.update(place_params)
+    	redirect_to @place
+  		else
+    	render 'edit'
+  		end
 	end
 
 	def destroy
-		# assign an instance variable to the post with id from params
-		# destroy the post
-		# redirect to index
+		@place = Place.find(params[:id])
+		@place.destroy
+
+		redirect_to_places_path
 	end
 
 private
 	def post_params
-		# fill in with strong parameters
+		params.require(:place).permit(:bru_name, :title, :body)
 	end
 end
